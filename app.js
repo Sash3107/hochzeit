@@ -1,6 +1,6 @@
 /***** EINSTELLUNGEN *****/
 // ⬇️ HIER deine aktuelle /exec-URL eintragen
-const SCRIPT_WEB_APP_URL = "PASTE_YOUR_EXEC_URL_HERE";
+const SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzz3srWJd-s54Uv08u4whxlLT6Mxy8vJpItzDX5rdd28G420qDnp8E23vh-yVEnw_Qn/exec";
 
 // Admin-Login (unverändert)
 const ADMIN_PASSWORD_HASH = "07624e9bfe204cd25b18b2b68786c509b094788304a5141411f03926fe88e4fc";

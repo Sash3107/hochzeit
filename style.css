@@ -116,6 +116,7 @@ textarea { resize: vertical }
 .btn:hover { background: var(--accent-dark) }
 .btn:active { transform: translateY(1px) }
 
+/* Dankesnachricht */
 .msg {
   text-align: center;
   font-size: 1.6rem;

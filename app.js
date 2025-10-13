@@ -1,11 +1,11 @@
 /***** EINSTELLUNGEN *****/
-// 1) Deine veröffentlichte Web-App-URL (Google Apps Script):
+// Deine veröffentlichte Web-App-URL (Google Apps Script)
 const SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzXZuai1hBOobHy-TRJhdiQ6HpGHpaUwiJdd8b4yd_LRoYProCPrc0wQB-gg3qPLWBR/exec";
 
-// 2) Admin-Passwort als SHA-256-Hash (Hex) von "!23Bisamratte!23"
+// Admin-Passwort als SHA-256-Hash von "!23Bisamratte!23"
 const ADMIN_PASSWORD_HASH = "07624e9bfe204cd25b18b2b68786c509b094788304a5141411f03926fe88e4fc";
 
-// 3) Link zur Tabelle im Admin-Dashboard
+// Link zur Tabelle im Admin-Dashboard
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/1jlm7rWakkZDUe8bRUKS7utz53PbbtHgMjtxfJ-A6-IM/edit?gid=0#gid=0";
 
 /***** HELFER *****/
@@ -24,13 +24,12 @@ function qs(sel,root=document){ return root.querySelector(sel); }
   const blockIfJa = qs('#blockIfJa');
   const msg = qs('#msg');
 
-  // Toggle Sichtbarkeit + Required je nach Teilnahme
   function applyTeilnahmeState(){
     const t = form.teilnahme.value;
     const show = (t === 'Ja');
     blockIfJa.style.display = show ? '' : 'none';
 
-    // required dynamisch setzen, damit HTML5-Validierung nicht blockiert
+    // Pflichtfelder dynamisch aktivieren/deaktivieren
     for (const el of form.querySelectorAll('input[name="begleitung"], input[name="ernaehrung"]')){
       if (el.type === 'radio') el.required = show;
     }
@@ -43,7 +42,6 @@ function qs(sel,root=document){ return root.querySelector(sel); }
     e.preventDefault();
     msg.hidden = true;
 
-    // Native Validierung auslösen, falls nötig
     if (!form.checkValidity()){
       form.reportValidity();
       return;
@@ -62,11 +60,13 @@ function qs(sel,root=document){ return root.querySelector(sel); }
     };
 
     try{
+      // CORS-kompatibler Request: text/plain, kein Preflight
       const res = await fetch(SCRIPT_WEB_APP_URL, {
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(data)
       });
+
       const json = await res.json();
 
       if(json.ok){
@@ -80,65 +80,4 @@ function qs(sel,root=document){ return root.querySelector(sel); }
         applyTeilnahmeState();
         qs('input[name="name"]').focus();
       } else {
-        throw new Error(json.error || 'Unbekannter Fehler');
-      }
-    }catch(err){
-      console.error(err);
-      msg.textContent = "Fehler beim Senden. Bitte später erneut versuchen.";
-      msg.hidden = false;
-    }
-  });
-})();
-
-/***** ADMIN: Login & Stats *****/
-(function initAdmin(){
-  const loginBox = qs('#loginBox');
-  if(!loginBox) return; // nicht auf admin.html
-
-  const pwd = qs('#adminPwd');
-  const loginBtn = qs('#loginBtn');
-  const loginErr = qs('#loginErr');
-  const stats = qs('#stats');
-  const sheetLink = qs('#sheetLink');
-  const btnRefresh = qs('#refreshBtn');
-
-  if (SHEET_URL && sheetLink) sheetLink.href = SHEET_URL;
-
-  async function fetchStats(){
-    const url = `${SCRIPT_WEB_APP_URL}?action=stats`;
-    const res = await fetch(url);
-    return await res.json();
-  }
-
-  async function renderStats(){
-    try{
-      const json = await fetchStats();
-      if (!json.ok) throw new Error('Backend-Fehler');
-
-      qs('#kpiErwachsene').textContent = json.erwachsene;
-      qs('#kpiKinder').textContent     = json.kinder;
-      qs('#kpiVeg').textContent        = json.vegetarier;
-      qs('#kpiVegan').textContent      = json.veganer;
-      qs('#kpiPlusOne').textContent    = json.plusOne;
-      qs('#kpiAbsagen').textContent    = json.absagen;
-    }catch(err){
-      console.error(err);
-    }
-  }
-
-  loginBtn.addEventListener('click', async ()=>{
-    const hash = await sha256Hex(pwd.value);
-    if (hash === ADMIN_PASSWORD_HASH){
-      loginBox.hidden = true;
-      stats.hidden = false;
-      renderStats();
-      window.__statTimer = setInterval(renderStats, 10000); // Auto-Refresh alle 10s
-    } else {
-      loginErr.hidden = false;
-      setTimeout(()=> loginErr.hidden = true, 2500);
-    }
-    pwd.value = '';
-  });
-
-  btnRefresh.addEventListener('click', renderStats);
-})();
+        throw new Error(json.error || 'Unbekannter

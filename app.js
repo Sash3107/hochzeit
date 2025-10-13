@@ -65,16 +65,22 @@ function qs(sel,root=document){ return root.querySelector(sel); }
 
       const json = await res.json();
 
-      if(json.ok){
+      if (json.ok) {
+        // Nachricht bestimmen
         let text = "Danke! Wir freuen uns auf dich!";
-        if (teilnahme === 'Nein') text = "Danke für deine Rückmeldung!";
-        if (teilnahme === 'Ja' && data.begleitung === 'Ja') text = "Danke, wir freuen uns auf euch!";
+        if (teilnahme === "Nein") text = "Danke für deine Rückmeldung!";
+        if (teilnahme === "Ja" && data.begleitung === "Ja") text = "Danke, wir freuen uns auf euch!";
+
+        // Formular ausblenden und Dankestext anzeigen
+        form.style.display = "none";
         msg.textContent = text;
         msg.hidden = false;
-        form.reset();
-        applyTeilnahmeState();
-        qs('input[name="name"]').focus();
-      } else {
+        msg.style.fontSize = "1.4rem";
+        msg.style.fontWeight = "600";
+        msg.style.textAlign = "center";
+        msg.style.marginTop = "2em";
+}
+       else {
         throw new Error(json.error || 'Unbekannter Fehler');
       }
 

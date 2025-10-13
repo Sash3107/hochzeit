@@ -16,48 +16,51 @@
     <p class="subtitle">Unsere Hochzeit am 12.09.2026</p>
 
     <form id="rsvpForm" class="form" novalidate>
-      <label>Dein Name*
-        <input type="text" name="name" required autocomplete="name" placeholder="Vor- und Nachname">
-      </label>
+  <label>Dein Name*
+    <input type="text" name="name" required autocomplete="name" placeholder="Vor- und Nachname">
+  </label>
 
-      <fieldset class="fs">
-        <legend>Wirst du kommen?*</legend>
-        <div class="row">
-          <label class="chip"><input type="radio" name="teilnahme" value="Ja" required> Ja</label>
-          <label class="chip"><input type="radio" name="teilnahme" value="Nein"> Nein</label>
-        </div>
-      </fieldset>
+  <fieldset class="fs">
+    <legend>Wirst du kommen?*</legend>
+    <div class="row">
+      <label class="chip"><input type="radio" name="teilnahme" value="Ja" required> Ja</label>
+      <label class="chip"><input type="radio" name="teilnahme" value="Nein"> Nein</label>
+    </div>
+  </fieldset>
 
-      <div id="blockIfJa">
-        <fieldset class="fs">
-          <legend>Bringst du eine Begleitung (+1) mit?*</legend>
-          <div class="row">
-            <label class="chip"><input type="radio" name="begleitung" value="Ja"> Ja</label>
-            <label class="chip"><input type="radio" name="begleitung" value="Nein"> Nein</label>
-          </div>
-        </fieldset>
-
-        <label>Wie viele Kinder bringst du mit?
-          <input type="number" name="kinder" min="0" max="20" step="1" inputmode="numeric" value="0">
-        </label>
-
-        <fieldset class="fs">
-          <legend>Ernährung*</legend>
-          <div class="row">
-            <label class="chip"><input type="radio" name="ernaehrung" value="Normal"> Normal</label>
-            <label class="chip"><input type="radio" name="ernaehrung" value="Vegetarisch"> Vegetarisch</label>
-            <label class="chip"><input type="radio" name="ernaehrung" value="Vegan"> Vegan</label>
-          </div>
-        </fieldset>
+  <div id="blockIfJa">
+    <fieldset class="fs">
+      <legend>Bringst du eine Begleitung (+1) mit?*</legend>
+      <div class="row">
+        <label class="chip"><input type="radio" name="begleitung" value="Ja"> Ja</label>
+        <label class="chip"><input type="radio" name="begleitung" value="Nein"> Nein</label>
       </div>
+    </fieldset>
 
-      <label>Kommentar (optional)
-        <textarea name="kommentar" rows="3" placeholder="Allergien, Hinweise …"></textarea>
-      </label>
+    <label>Wie viele Kinder bringst du mit?
+      <input type="number" name="kinder" min="0" max="20" step="1" inputmode="numeric" value="0">
+    </label>
 
-      <button type="submit" class="btn">Antwort senden</button>
-      <p id="msg" class="msg" hidden></p>
-    </form>
+    <fieldset class="fs">
+      <legend>Ernährung*</legend>
+      <div class="row">
+        <label class="chip"><input type="radio" name="ernaehrung" value="Normal"> Normal</label>
+        <label class="chip"><input type="radio" name="ernaehrung" value="Vegetarisch"> Vegetarisch</label>
+        <label class="chip"><input type="radio" name="ernaehrung" value="Vegan"> Vegan</label>
+      </div>
+    </fieldset>
+  </div>
+
+  <label>Kommentar (optional)
+    <textarea name="kommentar" rows="3" placeholder="Allergien, Hinweise …"></textarea>
+  </label>
+
+  <button type="submit" class="btn">Antwort senden</button>
+</form>
+
+<!-- WICHTIG: Nachricht steht jetzt außerhalb des Formulars -->
+<p id="msg" class="msg" hidden></p>
+
   </main>
 
   <script src="app.js"></script>

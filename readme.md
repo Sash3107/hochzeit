@@ -32,7 +32,7 @@ Sheet-Name standardmäßig `Tabelle1`.
    https://sash3107.github.io/hochzeit/
 
 ## Admin-Login
-- Passwort: `!23Bisamratte!23` (wird clientseitig gehasht).
+- Passwort: `*****` (wird clientseitig gehasht).
 - Öffne `admin.html`, gib das Passwort ein.
 
 ## Anpassungen

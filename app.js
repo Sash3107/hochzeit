@@ -1,11 +1,6 @@
 /***** EINSTELLUNGEN *****/
-// URL deiner veröffentlichten Google-Web-App
 const SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzh_t_zNL6eU28kL8m3O02DgMSCVbkNT7s6CXF3Y3zJaqB6wnPWo9xrxB8ZyDM28Y6u/exec";
-
-// SHA-256 Hash von "!23Bisamratte!23"
 const ADMIN_PASSWORD_HASH = "07624e9bfe204cd25b18b2b68786c509b094788304a5141411f03926fe88e4fc";
-
-// Optionaler Direktlink zur Tabelle im Adminbereich
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/1jlm7rWakkZDUe8bRUKS7utz53PbbtHgMjtxfJ-A6-IM/edit?gid=0";
 
 /***** HELFER *****/
@@ -22,19 +17,34 @@ function qs(sel,root=document){ return root.querySelector(sel); }
   if(!form) return;
 
   const blockIfJa = qs('#blockIfJa');
+  const blockBegleitung = qs('#begleitungErnaehrung');
   const msg = qs('#msg');
 
-  // Sichtbarkeit von Feldern je nach Auswahl „Ja/Nein“
   function applyTeilnahmeState(){
     const t = form.teilnahme.value;
     const show = (t === 'Ja');
     blockIfJa.style.display = show ? '' : 'none';
+    blockBegleitung.hidden = true;
+
     for (const el of form.querySelectorAll('input[name="begleitung"], input[name="ernaehrung"]')){
       if (el.type === 'radio') el.required = show;
     }
   }
+
+  // Änderungen der Teilnahme
   form.addEventListener('change', applyTeilnahmeState);
   applyTeilnahmeState();
+
+  // Änderungen an der Begleitungsfrage
+  form.querySelectorAll('input[name="begleitung"]').forEach(radio => {
+    radio.addEventListener('change', e => {
+      const plusOne = e.target.value === 'Ja';
+      blockBegleitung.hidden = !plusOne;
+      for (const el of form.querySelectorAll('input[name="begleitungErnaehrung"]')){
+        if (el.type === 'radio') el.required = plusOne;
+      }
+    });
+  });
 
   // Formular absenden
   form.addEventListener('submit', async (e)=>{
@@ -52,11 +62,11 @@ function qs(sel,root=document){ return root.querySelector(sel); }
       begleitung: coming ? (form.begleitung.value || '') : 'Nein',
       kinder: coming ? Number(form.kinder.value||0) : 0,
       ernaehrung: coming ? (form.ernaehrung.value||'') : '',
+      begleitungErnaehrung: coming ? (form.begleitungErnaehrung?.value || '') : '',
       kommentar: (form.kommentar.value||'').trim()
     };
 
     try{
-      // Einfache text/plain-Anfrage → kein CORS-Preflight
       const res = await fetch(SCRIPT_WEB_APP_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -66,12 +76,9 @@ function qs(sel,root=document){ return root.querySelector(sel); }
       const json = await res.json();
 
       if (json.ok) {
-        // Nachricht bestimmen
         let text = "Danke! Wir freuen uns auf dich!";
         if (teilnahme === "Nein") text = "Danke für deine Rückmeldung!";
         if (teilnahme === "Ja" && data.begleitung === "Ja") text = "Danke, wir freuen uns auf euch!";
-
-        // Formular ausblenden und Dankestext anzeigen
         form.style.display = "none";
         msg.textContent = text;
         msg.hidden = false;
@@ -79,8 +86,7 @@ function qs(sel,root=document){ return root.querySelector(sel); }
         msg.style.fontWeight = "600";
         msg.style.textAlign = "center";
         msg.style.marginTop = "2em";
-}
-       else {
+      } else {
         throw new Error(json.error || 'Unbekannter Fehler');
       }
 

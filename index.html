@@ -41,13 +41,25 @@
         </label>
 
         <fieldset class="fs">
-          <legend>Ernährung*</legend>
+          <legend>Deine Ernährung*</legend>
           <div class="row">
             <label class="chip"><input type="radio" name="ernaehrung" value="Normal"> Normal</label>
             <label class="chip"><input type="radio" name="ernaehrung" value="Vegetarisch"> Vegetarisch</label>
             <label class="chip"><input type="radio" name="ernaehrung" value="Vegan"> Vegan</label>
           </div>
         </fieldset>
+
+        <!-- Neues Feld für Begleitung -->
+        <div id="begleitungErnaehrung" hidden>
+          <fieldset class="fs">
+            <legend>Ernährung deiner Begleitung*</legend>
+            <div class="row">
+              <label class="chip"><input type="radio" name="begleitungErnaehrung" value="Normal"> Normal</label>
+              <label class="chip"><input type="radio" name="begleitungErnaehrung" value="Vegetarisch"> Vegetarisch</label>
+              <label class="chip"><input type="radio" name="begleitungErnaehrung" value="Vegan"> Vegan</label>
+            </div>
+          </fieldset>
+        </div>
       </div>
 
       <label>Kommentar (optional)

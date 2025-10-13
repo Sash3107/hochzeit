@@ -99,3 +99,10 @@ textarea{ resize:vertical }
   h1{ font-size:28px }
   .subtitle{ font-size:0.95rem }
 }
+.msg {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 3rem;
+  color: #2e4b3c; /* dezentes Grün passend zum Rest */
+}

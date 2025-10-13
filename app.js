@@ -1,5 +1,5 @@
 /***** EINSTELLUNGEN *****/
-const SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzh_t_zNL6eU28kL8m3O02DgMSCVbkNT7s6CXF3Y3zJaqB6wnPWo9xrxB8ZyDM28Y6u/exec";
+const SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxG2CiuoyTxNVBUy4KBP-A25TCV4Ft20p7tuJZtYTdjxT31cnRWBLD3b4m7wxDjgBeP/exec";
 const ADMIN_PASSWORD_HASH = "07624e9bfe204cd25b18b2b68786c509b094788304a5141411f03926fe88e4fc";
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/1jlm7rWakkZDUe8bRUKS7utz53PbbtHgMjtxfJ-A6-IM/edit?gid=0";
 

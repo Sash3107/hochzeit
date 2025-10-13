@@ -1,7 +1,7 @@
 :root {
   --bg: #f7f6f3;
   --card: #ffffffcc;
-  --accent: #A8C3A1; /* Pastell-Grün */
+  --accent: #A8C3A1;
   --accent-dark: #7fa27a;
   --text: #243024;
   --muted: #4b5a4b;
@@ -16,9 +16,9 @@ body {
   background: var(--bg);
 }
 
-/* Hintergrundbild + Overlay */
+/* Hintergrundbild */
 .bg-image {
-  background-image: url('hintergrund.jpg'); /* euer Foto */
+  background-image: url('hintergrund.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -31,7 +31,7 @@ body {
   backdrop-filter: blur(6px) brightness(1.05);
 }
 
-/* Karte / Container */
+/* Karte */
 .card {
   position: relative;
   z-index: 1;
@@ -54,6 +54,7 @@ h1 {
   color: var(--muted);
 }
 
+/* Formular */
 .form label { display: block; margin: 14px 0 }
 .form input[type="text"],
 .form input[type="number"],
@@ -115,7 +116,6 @@ textarea { resize: vertical }
 .btn:hover { background: var(--accent-dark) }
 .btn:active { transform: translateY(1px) }
 
-/* Dankesnachricht */
 .msg {
   text-align: center;
   font-size: 1.6rem;

@@ -1,6 +1,6 @@
 /***** EINSTELLUNGEN *****/
 // ⬇️ HIER deine aktuelle /exec-URL eintragen
-const SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzz3srWJd-s54Uv08u4whxlLT6Mxy8vJpItzDX5rdd28G420qDnp8E23vh-yVEnw_Qn/exec";
+const SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwBOKwIhphX9gafAeUwD1MnmbxQF-ahtEH7kHPK9J-M_6UFDSwINDoQvS0TtxNuPvpq/exec";
 
 
 // Admin-Login (unverändert)
